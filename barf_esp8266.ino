@@ -77,13 +77,11 @@ bool connect() {
 }
 
 void send_data(String command_type, String value) {
-	Serial.print(command_type);
-	Serial.print(" ");
-	Serial.println(value);
+	Serial.print(command_type + String(" ") + value + String('\n'));
 }
 
 void send_data(String command_type) {
-	Serial.println(command_type);
+	Serial.print(command_type + String('\n'));
 }
 
 String request_response() {
@@ -357,9 +355,9 @@ void handle_serial() {
 			}
 			WiFiClient client;
 			client.connect(address.c_str(), port);
-			client.println(method + String(" ") + path + String(" HTTP/1.1"));
-			client.println(String("Host: ") + address + String(":") + String(port));
-			client.println();
+			client.print(method + String(" ") + path + String(" HTTP/1.1") + String('\n'));
+			client.print(String("Host: ") + address + String(":") + String(port) + String('\n'));
+			client.print('\n');
 
 
 			// Get response
