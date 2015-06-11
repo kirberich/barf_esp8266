@@ -166,7 +166,7 @@ void handle_request() {
 
 	// Add a trailing & for easier parsing
 	if (query_string[query_string.length() - 1] != '&') {
-		query_string = query_string += "&";
+		query_string += "&";
 	}
 
 	// Get GET variables
@@ -175,23 +175,23 @@ void handle_request() {
 	while(true) {
 		int next_var = chopped_query_string.indexOf("&");
 		if (next_var != -1) {
-			String var = chopped_query_string.substring(0, next_var);
+			String var_value = chopped_query_string.substring(0, next_var);
+			String var = var_value;
 			String value;
 			int equals_index = var.indexOf("=");
 			if (equals_index != -1) {
-				var = var.substring(0, equals_index);
-				value = var.substring(equals_index+1);
+				var = var_value.substring(0, equals_index);
+				value = var_value.substring(equals_index+1);
 			} else {
 				value = "";
 			}
 			get_vars.add({var, value});
 
-			chopped_query_string = chopped_path.substring(next_var+1);
+			chopped_query_string = chopped_query_string.substring(next_var+1);
 		} else {
 			break;
 		}
 	}
-
 	client.flush();
 
 	String response_data;
