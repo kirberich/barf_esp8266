@@ -10,6 +10,10 @@ const int LED_OFF = 2;
 const int LED_ON = 3;
 const int LED_GPIO = 4;
 
+const String ERROR = "__err__";
+const String TIMEOUT = "__timeout__";
+const String UNEXPECTED_COMMAND = "__unexpected_command__";
+
 const String COMMAND_DEBUG = "debug";
 const String COMMAND_METHOD = "method";
 const String COMMAND_NUM_FRAMENTS = "num_fragments";
