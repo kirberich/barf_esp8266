@@ -302,11 +302,15 @@ void handle_request() {
 		status_reason = "";
 	}
 
-	// Prepare the response
-	String s = String("HTTP/1.1 " + String(status_code) + " " + status_reason + "\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>") + response_data + String("</html>\n");
-
 	// Send the response to the client
-	client.print(s);
+	client.print("HTTP/1.1 ");
+	client.print(status_code);
+	client.print(" ");
+	client.print(status_reason);
+	client.print("\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>");
+	client.print(response_data);
+	client.print("</html>\n");
+
 	client.stop();
 
 	// Update activity timestamp
