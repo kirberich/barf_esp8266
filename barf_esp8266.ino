@@ -277,6 +277,9 @@ void handle_request() {
 			response_data = response_data.substring(7);
 		} else if (!response_data.length()) {
 			status_code = 404;
+		} else if (response_data == TIMEOUT) {
+			response_data = "";
+			status_code = 504;
 		}
 	}
 
@@ -293,6 +296,8 @@ void handle_request() {
 		status_reason = "I'm a teapot";
 	} else if (status_code == 500) {
 		status_reason = "Internal Server Error";
+	} else if (status_code == 504) {
+		status_reason = "Gateway Timeout";
 	} else {
 		status_reason = "";
 	}
