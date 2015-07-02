@@ -76,6 +76,41 @@ bool connect() {
 	connect(1000);
 }
 
+String read_line(unsigned long timeout) {
+	unsigned long begin = millis();
+
+	while(!Serial.available()) {
+		if (millis() - begin > timeout) {
+			return TIMEOUT;
+		}
+	}
+
+	String line;
+
+	char c;
+	while (true) {
+		if (Serial.available()) {
+			c = Serial.read();
+
+			if (c == '\n') {
+				break;
+			}
+
+			line += c;
+		}
+
+		if (millis() - begin > timeout) {
+			return TIMEOUT;
+		}
+	}
+
+	return line;
+}
+
+String read_line() {
+	return read_line(1000);
+}
+
 void send_data(String command_type, String value) {
 	Serial.print(command_type + String(" ") + value + String('\n'));
 }
@@ -87,7 +122,7 @@ void send_data(String command_type) {
 String request_response() {
 	// Send command asking for a response, then wait around for one
 	send_data(COMMAND_REQUEST_RESPONSE);
-	return Serial.readStringUntil('\n');
+	return read_line();
 }
 
 void setup() {
