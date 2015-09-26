@@ -70,6 +70,7 @@ void connect(unsigned int timeout) {
 	}
 
 	server.begin();
+	server.setNoDelay(true);
 }
 
 bool connect() {
