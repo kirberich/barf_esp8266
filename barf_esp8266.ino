@@ -304,14 +304,15 @@ void handle_request() {
 	}
 
 	// Send the response to the client
-	client.print("HTTP/1.1 ");
-	client.print(status_code);
-	client.print(" ");
-	client.print(status_reason);
-	client.print("\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>");
-	client.print(response_data);
-	client.print("</html>\n");
-
+  String response = String("HTTP/1.1 ") + 
+    String(status_code) + 
+    String(" ") + 
+    String(status_reason) + 
+    String("\r\nContent-Type: text/html\r\n\r\n") + 
+    String(response_data) + 
+    String("\n");
+    
+	client.write(response.c_str(), response.length());
 	client.stop();
 
 	// Update activity timestamp
