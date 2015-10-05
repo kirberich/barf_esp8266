@@ -322,7 +322,7 @@ void handle_request() {
 
 void handle_serial() {
 	while(Serial.available()) {
-		String line = Serial.readStringUntil('\n');
+		String line = read_line(100);
 
 		String command = line;
 		String args;
