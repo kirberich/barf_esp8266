@@ -62,7 +62,7 @@ void connect(unsigned int timeout) {
 
 	// If a timeout of 0 is used this might try forever, locking up the code.
 	unsigned long before = millis();
-	while (is_connected()) {
+	while (!is_connected()) {
 		if (timeout && millis() - before > timeout) {
 			return;
 		}
