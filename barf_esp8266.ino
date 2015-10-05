@@ -313,6 +313,7 @@ void handle_request() {
 		String("\n");
 
 	client.write(response.c_str(), response.length());
+	delay(1);
 	client.stop();
 
 	// Update activity timestamp
