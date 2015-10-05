@@ -304,14 +304,14 @@ void handle_request() {
 	}
 
 	// Send the response to the client
-  String response = String("HTTP/1.1 ") + 
-    String(status_code) + 
-    String(" ") + 
-    String(status_reason) + 
-    String("\r\nContent-Type: text/html\r\n\r\n") + 
-    String(response_data) + 
-    String("\n");
-    
+  	String response = String("HTTP/1.1 ") + 
+		String(status_code) + 
+		String(" ") + 
+		String(status_reason) + 
+		String("\r\nContent-Type: text/html\r\n\r\n") + 
+		String(response_data) + 
+		String("\n");
+
 	client.write(response.c_str(), response.length());
 	client.stop();
 
@@ -404,7 +404,6 @@ void handle_serial() {
 			client.print(method + String(" ") + path + String(" HTTP/1.1") + String('\n'));
 			client.print(String("Host: ") + address + String(":") + String(port) + String('\n'));
 			client.print('\n');
-
 
 			// Get response
 			String response = client.readString();
